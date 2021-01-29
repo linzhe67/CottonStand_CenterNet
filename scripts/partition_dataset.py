@@ -32,11 +32,8 @@ def iterate_dir(source, dest, ratio, copy_xml):
     if not os.path.exists(test_dir):
         os.makedirs(test_dir)
 
-    images = [f for f in Path(source).iterdir()
+        images = [f for f in os.listdir(source)
               if re.search(r'([a-zA-Z0-9\s_\\.\-\(\):])+(.jpg|.jpeg|.png)$', f)]
-    
-    #images = [f for f in os.listdir(source)
-              #if re.search(r'([a-zA-Z0-9\s_\\.\-\(\):])+(.jpg|.jpeg|.png)$', f)]
 
     num_images = len(images)
     num_test_images = math.ceil(ratio*num_images)
