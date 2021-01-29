@@ -18,6 +18,7 @@ from shutil import copyfile
 import argparse
 import math
 import random
+from pathlib import Path
 
 
 def iterate_dir(source, dest, ratio, copy_xml):
@@ -31,8 +32,11 @@ def iterate_dir(source, dest, ratio, copy_xml):
     if not os.path.exists(test_dir):
         os.makedirs(test_dir)
 
-    images = [f for f in os.listdir(source)
+    images = [f for f in Path(source).iterdir()
               if re.search(r'([a-zA-Z0-9\s_\\.\-\(\):])+(.jpg|.jpeg|.png)$', f)]
+    
+    #images = [f for f in os.listdir(source)
+              #if re.search(r'([a-zA-Z0-9\s_\\.\-\(\):])+(.jpg|.jpeg|.png)$', f)]
 
     num_images = len(images)
     num_test_images = math.ceil(ratio*num_images)
